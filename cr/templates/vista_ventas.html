@@ -1,0 +1,31 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+<style>
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+}
+</style>
+
+<h1>Ventas</h1>
+<table>
+<tr><th>producto</th><th>precio unitario</th><th>cantidad</th><th>fecha-semana</th><th>total venta</th></tr>
+{% for v in ventas %}
+    <tr>
+   <td> {{ v.producto }}</td>
+
+   <td> {{ v.producto.precio_unidad }}</td>
+   <td> {{ v.cantidad_vendida }}</td>
+   <td> {{ v.numero_semana }}</td>
+  <td>  {{ v.calcular_precio_a_fecha_venta }}</td>
+</tr>
+{% endfor %}
+
+</table>
+{% endblock %}

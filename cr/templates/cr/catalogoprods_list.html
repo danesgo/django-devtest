@@ -1,0 +1,24 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+<title>Vista de Productos</title>
+<h1>Listado de los productos<br/> {{ search }}</h1>
+
+<form action="/search" method="post">
+    <input type="text"  value="Producto" name="product_name" size="20"/>
+    <button type="submit">Buscar!</button>
+</form>
+
+</form>
+
+<ol>
+{% for prod in object_list %}
+    <li>
+    <strong>{{ prod.nombre_producto }}</strong><br />
+    {{ prod.pais_producto }}
+        <a href="/detalle_tipo?product_type={{ prod.tipo_producto }}">{{ prod.tipo_producto }}</a>
+    </li>
+
+{% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "navbar.html"%}
+    
+{% block content %}
+<title>Vista de Productos</title>
+<style>
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+}
+</style>
+
+<h1>Ingresos de Producto por Semanas</h1>
+<table>
+<tr><th>producto</th><th>precio producto</th><th>cantidad ingresada</th><th>fecha ingreso</th></tr>
+
+{% for ingreso in object_list %}
+<tr>
+   <td><strong>{{ ingreso.producto.nombre_producto }}</strong></td>
+    <td>{{ ingreso.producto.precio_unidad }}</td>
+        <td>{{ ingreso.cantidad_ingresada}}</td>
+  <td>{{ ingreso.fecha_ingreso}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

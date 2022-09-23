@@ -1,0 +1,29 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+<div>
+    <p>subir csv semanal con datos ventas.</p>
+    <div>
+        <form action="uploaded_csv" method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <input type="file" name="csv_file">
+            <button type="submit" class="btn btn-primary">
+                Subir CSV
+            </button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <p>subir excel con todos los datos.</p>
+    <div>
+        <form action="excel_upload" method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <input type="file" name="excel_file">
+            <button type="submit" class="btn btn-primary">
+                Subir excel
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
