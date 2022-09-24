@@ -1,0 +1,36 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+<body>
+
+    <title>Vista de Producto Individual {{ p.nombre_producto }}</title>
+
+
+    <style>
+    td,
+    th {
+        border: 1px solid rgb(190, 190, 190);
+        padding: 10px;
+    }
+    table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200, 200, 200);
+    }
+    </style>    
+
+    <h1>Vista de Producto Individual {{ p.nombre_producto }}</h1>
+    <table>
+    <tr><th>producto</th><th>tipo producto</th><th>precio unidad</th><th>fecha creación</th></tr>
+
+    <tr>
+        <td> {{ p.nombre_producto }}</td>
+        <td> {{ p.tipo_producto }}</td>
+        <td> {{ p.precio_unidad }}</td>
+        <td> {{ p.created_at }}</td>
+
+    </tr>
+
+</table>
+{{ chart | safe }} 
+</body>
+{% endblock %}

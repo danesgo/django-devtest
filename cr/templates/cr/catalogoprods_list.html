@@ -3,6 +3,7 @@
 {% block content %}
 <title>Vista de Productos</title>
 <h1>Listado de los productos<br/> {{ search }}</h1>
+<a>El nombre del producto redirecciona la vista individaul y grafica de ventas</a>
 
 <form action="/search" method="post">
     <input type="text"  value="Producto" name="product_name" size="20"/>
@@ -14,7 +15,7 @@
 <ol>
 {% for prod in object_list %}
     <li>
-    <strong>{{ prod.nombre_producto }}</strong><br />
+    <h2><a href="/products/{{prod.id}}">{{ prod.nombre_producto }} </a></h2><br />
     {{ prod.pais_producto }}
         <a href="/detalle_tipo?product_type={{ prod.tipo_producto }}">{{ prod.tipo_producto }}</a>
     </li>

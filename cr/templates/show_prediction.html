@@ -1,0 +1,17 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+{{ chart | safe }}
+
+<table>
+<tr><th>semana</th><th>venta</th></tr>
+{% for v, i in data %}
+<tr>
+    <td>{{ i }}</td><td>{{ v }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{{ predicto }}
+
+{% endblock %}

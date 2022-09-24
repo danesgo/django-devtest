@@ -14,26 +14,35 @@ class DateWeekTruncated(models.DateField):
             return self.truncate_week(value)
         return value
 
-class CatalogoProds(models.Model):
-    
-    """ Table 1 """
 
+
+
+class CatalogoProds(models.Model):
+    """Representa la Tabla 1, con los productos y su informacion.
+
+    Debido a que el indice de catalog en realidad es una version desnormalizada
+    de una tabla producto y una tabla precio-fecha, se genera un ID por cada combinacion
+    producto-fecha para guardar el historial de precios (y los demas atributos).
+    """
+
+    # crea un campo implicito con _id
     nombre_producto = models.CharField(max_length=127)
 
     pais_producto = models.CharField(max_length=127)
     tipo_producto = models.CharField(max_length=127)
     precio_unidad = models.FloatField()
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Producto"
         verbose_name_plural = "Productos"
 
     def __str__(self):
-        return f"Producto: {self.nombre_producto}({self.created_at.strftime('%b %d %Y')})-{self.tipo_producto}"
+        return f"Producto: {self.nombre_producto}({self.created_at.strftime('%b %d %Y')}) - {self.tipo_producto}"
+
 
 class IngresoProds(models.Model):
-    nombre_producto = models.ForeignKey(CatalogoProds, on_delete=models.CASCADE)
+    producto = models.ForeignKey(CatalogoProds, on_delete=models.CASCADE)
     cantidad_ingresada = models.IntegerField()
     fecha_ingreso = models.DateField()
 
@@ -41,19 +50,19 @@ class IngresoProds(models.Model):
         verbose_name = "Ingreso"
         verbose_name_plural = "Ingresos"
 
-#Tabla 3
+
+# Tabla 3
 class VentaProds(models.Model):
-    nombre_producto = models.ForeignKey(CatalogoProds, on_delete=models.CASCADE)
+    producto = models.ForeignKey(CatalogoProds, on_delete=models.CASCADE)
     cantidad_vendida = models.IntegerField()
-    numero_semana = DateWeekTruncated()
+    numero_semana = models.CharField(max_length=20) #DateWeekTruncated()
 
     class Meta:
         verbose_name = "Venta"
         verbose_name_plural = "Ventas"
 
     def calcular_precio_a_fecha_venta(self):
-        # obtener objeto producto y extraer precio
-        precio_a_fecha_de_venta = self.producto.precio_unidad 
+        precio_a_fecha_de_venta = self.producto.precio_unidad  # obtener objeto producto y extraer precio
 
         return self.cantidad_vendida * precio_a_fecha_de_venta
 

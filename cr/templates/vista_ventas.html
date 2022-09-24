@@ -18,7 +18,7 @@ table {
 <tr><th>producto</th><th>precio unitario</th><th>cantidad</th><th>fecha-semana</th><th>total venta</th></tr>
 {% for v in ventas %}
     <tr>
-   <td> {{ v.producto }}</td>
+   <td> {{ v.producto.nombre_producto }}</td>
 
    <td> {{ v.producto.precio_unidad }}</td>
    <td> {{ v.cantidad_vendida }}</td>

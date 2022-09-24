@@ -3,9 +3,9 @@ from cr.models import *
 
 
 def parse_excel_file(uploaded_file):
-    sales_df = pandas.read_excel(uploaded_file, sheet_name=2)
-    prods_df = pandas.read_excel(uploaded_file, sheet_name=0)
-    ingreso_df = pandas.read_excel(uploaded_file, sheet_name=1)
+    sales_df = pandas.read_excel(uploaded_file, engine="openpyxl", sheet_name=2)
+    prods_df = pandas.read_excel(uploaded_file,  engine="openpyxl",sheet_name=0)
+    ingreso_df = pandas.read_excel(uploaded_file, engine="openpyxl", sheet_name=1)
     process_products(prods_df)
     process_sales(sales_df)
     process_ingreso(ingreso_df)
@@ -21,7 +21,8 @@ def process_sales(d_frame):
   for i, r in d_frame.iterrows():
     c = CatalogoProds.objects.filter(nombre_producto=r["Nombre de producto"]).order_by("-created_at").first()
     if not c:
-        print("Objecto c no encontrado: "+r["Nombre de producto"])
+        print("Objecto c no encontrado: ")
+        print(r)
         continue
     v = VentaProds.objects.create(producto=c, cantidad_vendida = r["Unidades vendidas"], numero_semana=r["Numero de semana"])
 

@@ -15,8 +15,15 @@ table {
 </style>
 
 <h1>Ingresos de Producto por Semanas</h1>
-<table>
-<tr><th>producto</th><th>precio producto</th><th>cantidad ingresada</th><th>fecha ingreso</th></tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio producto</th>
+            <th scope="col">Cantidad ingresada</th>
+            <th scope="col">Fecha ingreso</th>
+        </tr>
+    </thead>
 
 {% for ingreso in object_list %}
 <tr>
