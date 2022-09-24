@@ -60,7 +60,7 @@ def upload_file_csv(request):
 
     csv_file = request.FILES['csv_file']
     parse_csv_file(csv_file)
-    return HttpResponse("Archivo CSV cargdado exitosamente! <a href='/index'>Volver</a>")
+    return HttpResponse("Archivo CSV cargdado exitosamente! <a href='/'>Volver</a>")
 
 
 def upload_file_xls(request):
@@ -70,7 +70,7 @@ def upload_file_xls(request):
 
     excel_file = request.FILES['excel_file']
     parse_excel_file(excel_file)
-    return HttpResponse("Archivo Excel cargado exitosamente! <a href='/index'>Volver</a>")
+    return HttpResponse("Archivo Excel cargado exitosamente! <a href='/'>Volver</a>")
 
 
 def sales_chart_string(product_id, render_img=False):
